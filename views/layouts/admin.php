@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Admin Panel',
-        'brandUrl' => '/index.php?r=admin%2Findex',
+        'brandUrl' => '/admin',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -59,6 +59,10 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
+            'homeLink' => [
+                'label' => 'Admin',
+                'url' => '/admin'
+            ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
