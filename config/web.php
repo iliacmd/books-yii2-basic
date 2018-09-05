@@ -47,7 +47,9 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/' => 'site/index'
+                '/' => 'site/index',
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'apiBook'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => 'apiAuthor'],
             ],
         ]
     ],
