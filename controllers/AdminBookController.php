@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Author;
 use Yii;
 use app\models\Book;
 use app\models\SearchBook;
@@ -68,6 +69,7 @@ class AdminBookController extends Controller
     public function actionCreate()
     {
         $model = new Book();
+        $authors = $this->getAuthors();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,6 +77,7 @@ class AdminBookController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'authors' => $authors,
         ]);
     }
 
@@ -88,6 +91,7 @@ class AdminBookController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $authors = $this->getAuthors();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -95,6 +99,7 @@ class AdminBookController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+            'authors' => $authors
         ]);
     }
 
@@ -104,6 +109,8 @@ class AdminBookController extends Controller
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {
@@ -126,5 +133,13 @@ class AdminBookController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function getAuthors()
+    {
+        return Author::find()
+            ->select(['firstName', 'id'])
+            ->indexBy('id')
+            ->column();
     }
 }

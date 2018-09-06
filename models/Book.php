@@ -2,6 +2,8 @@
 
 namespace app\models;
 
+use app\behaviors\SaveBookAuthor;
+
 /**
  * This is the model class for table "book".
  *
@@ -40,6 +42,13 @@ class Book extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            ['class' => SaveBookAuthor::class]
         ];
     }
 
