@@ -48,8 +48,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '/' => 'site/index',
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'apiBook'],
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'apiAuthor'],
+                ['class' => 'yii\rest\UrlRule', 'controller' => ['api/book', 'api/author'], 'pluralize' => true],
             ],
         ]
     ],
