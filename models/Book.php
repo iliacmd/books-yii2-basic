@@ -9,8 +9,6 @@ use app\behaviors\SaveBookAuthor;
  *
  * @property int $id
  * @property string $title
- *
- * @property BookAuthor[] $bookAuthors
  * @property Author[] $authors
  */
 class Book extends \yii\db\ActiveRecord
@@ -43,6 +41,11 @@ class Book extends \yii\db\ActiveRecord
             'id' => 'ID',
             'title' => 'Title',
         ];
+    }
+
+    public function fields()
+    {
+        return ['id', 'title', 'authors'];
     }
 
     public function behaviors()
