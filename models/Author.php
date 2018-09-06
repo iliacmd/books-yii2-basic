@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use function foo\func;
 
 /**
  * This is the model class for table "author".
@@ -8,8 +9,6 @@ namespace app\models;
  * @property int $id
  * @property string $firstName
  * @property string $lastName
- *
- * @property BookAuthor[] $bookAuthors
  * @property Book[] $books
  */
 class Author extends \yii\db\ActiveRecord
@@ -42,6 +41,16 @@ class Author extends \yii\db\ActiveRecord
             'id' => 'ID',
             'firstName' => 'First Name',
             'lastName' => 'Last Name',
+        ];
+    }
+
+    public function fields()
+    {
+        return [
+            'id',
+            'fullName' => function () {
+                return $this->firstName.' '.$this->lastName;
+            }
         ];
     }
 
